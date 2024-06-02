@@ -11,15 +11,14 @@ export class ListaProdutoComponent implements OnInit {
 
   public produtos: Produto[] = [];
 
-  constructor(private _produtoService: ProdutoService, private router: Router) {}
+  constructor(private _produtoService: ProdutoService, private _router: Router) {}
 
   ngOnInit(): void {
     this.listarProdutos();
   }
 
   listarProdutos(): void {
-    this._produtoService.getProdutos()
-      .subscribe(
+    this._produtoService.getProdutos().subscribe(
         retornaProduto => {
           this.produtos = retornaProduto.map(
             item => {
@@ -44,6 +43,6 @@ export class ListaProdutoComponent implements OnInit {
       err => { console.log("erro ao Excluir") }
     );
     // window.location.href = "/restrito/lista";
-    this.router.navigate(["/restrito/lista"]);
+    this._router.navigate(["/restrito/lista"]);
   }
 }
