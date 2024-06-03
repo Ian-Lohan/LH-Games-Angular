@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,12 +7,21 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
 
-  constructor(private router: Router) { }
+export class LoginComponent implements OnInit {
 
-  onSubmit() {
-    
-    this.router.navigateByUrl('/inicio');
+  usuario!: string;
+  senha!: string;
+
+  constructor(private _loginService: LoginService, private _router:
+    Router) { }
+
+  ngOnInit(): void {
+  }
+  
+  fazerLogin() {
+    this._loginService.login(this.usuario, this.senha);
+    this._router.navigate(['/restrito/lista']);
+    this._loginService.setMostraMenu(false)
   }
 }
